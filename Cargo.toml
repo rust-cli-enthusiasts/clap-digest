@@ -1,0 +1,58 @@
+[package]
+name = "clap-digest"
+version = "0.1.0"
+description = "clap and digest integration"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+documentation = "https://github.com/wookietreiber/clap-digest"
+homepage = "https://github.com/wookietreiber/clap-digest"
+repository = "https://github.com/wookiereiber/clap-digest"
+keywords = ["clap", "digest"]
+categories = ["command-line-interface", "cryptography"]
+edition = "2021"
+
+[dependencies]
+clap = "3"
+digest = "0.10"
+blake2 = { version = "0.10", optional = true }
+blake3 = { version = "1", optional = true, features = ["traits-preview"] }
+fsb = { version = "0.1", optional = true }
+gost94 = { version = "0.10", optional = true }
+groestl = { version = "0.10", optional = true }
+md2 = { version = "0.10", optional = true }
+md4 = { version = "0.10", optional = true }
+md-5 = { version = "0.10", optional = true }
+ripemd = { version = "0.1", optional = true }
+sha1 = { version = "0.10", optional = true }
+sha2 = { version = "0.10", optional = true }
+sha3 = { version = "0.10", optional = true }
+shabal = { version = "0.4", optional = true }
+sm3 = { version = "0.4", optional = true }
+streebog = { version = "0.10", optional = true }
+tiger = { version = "0.2", optional = true }
+whirlpool = { version = "0.10", optional = true }
+
+[dev-dependencies]
+anyhow = "1"
+
+[features]
+md5 = ["dep:md-5"]
+default = [
+    "blake2",
+    "blake3",
+    "fsb",
+    "gost94",
+    "groestl",
+    "md2",
+    "md4",
+    "md5",
+    "ripemd",
+    "sha1",
+    "sha2",
+    "sha3",
+    "shabal",
+    "sm3",
+    "streebog",
+    "tiger",
+    "whirlpool"
+]
