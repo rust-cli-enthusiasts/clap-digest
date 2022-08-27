@@ -115,7 +115,28 @@
 use std::fmt;
 
 use clap::{PossibleValue, ValueEnum};
-use digest::DynDigest;
+pub use digest::DynDigest;
+
+#[cfg(not(any(
+    feature = "blake2",
+    feature = "blake3",
+    feature = "fsb",
+    feature = "gost94",
+    feature = "groestl",
+    feature = "md2",
+    feature = "md4",
+    feature = "md5",
+    feature = "ripemd",
+    feature = "sha1",
+    feature = "sha2",
+    feature = "sha3",
+    feature = "shabal",
+    feature = "sm3",
+    feature = "streebog",
+    feature = "tiger",
+    feature = "whirlpool"
+)))]
+compile_error!("at least one digest algorithm family feature needs to be enabled");
 
 /// Supported digest algorithms.
 #[allow(missing_docs)] // no docs for the variants
