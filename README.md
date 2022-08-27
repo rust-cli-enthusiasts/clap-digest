@@ -44,8 +44,18 @@ Features
     assert_eq!(hash, "acbd18db4cc2f85cedef654fccc4a4d8");
     ```
 
-1.  Algorithm groups are feature-gated (see example below). Use `cargo feature
-    clap-digest` for a complete listing.
+1.  Digest algorithm groups are feature-gated. Use `cargo feature
+    clap-digest` for a complete listing. At least one digest algorithm
+    group feature must be chosen. To limit the digest algorithm families
+    you want to support in your crate, define your own features, e.g.:
+
+    ```toml
+    [features]
+    default = ["sha2"]
+    md5 = ["clap-digest/md5"]
+    sha1 = ["clap-digest/sha1"]
+    sha2 = ["clap-digest/sha2"]
+    ```
 
 
 Example
