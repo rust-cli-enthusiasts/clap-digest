@@ -14,6 +14,7 @@ edition = "2021"
 [dependencies]
 clap = "3"
 digest = "0.10"
+serde = { version = "1.0", optional = true, features = ["derive"] }
 blake2 = { version = "0.10", optional = true }
 blake3 = { version = "1", optional = true, features = ["traits-preview"] }
 fsb = { version = "0.1", optional = true }

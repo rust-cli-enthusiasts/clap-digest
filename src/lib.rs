@@ -151,6 +151,7 @@ compile_error!("at least one digest algorithm family feature needs to be enabled
 /// Supported digest algorithms.
 #[allow(missing_docs)] // no docs for the variants
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[non_exhaustive]
 pub enum Digest {
     #[cfg(feature = "blake2")]
