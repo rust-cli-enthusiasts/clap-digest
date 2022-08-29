@@ -661,3 +661,24 @@ impl From<Digest> for Box<dyn DynDigest> {
         }
     }
 }
+
+// ----------------------------------------------------------------------------
+// tests
+// ----------------------------------------------------------------------------
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    const fn test_send() {
+        const fn assert_send<T: Send>() {}
+        assert_send::<Digest>();
+    }
+
+    #[test]
+    const fn test_sync() {
+        const fn assert_sync<T: Sync>() {}
+        assert_sync::<Digest>();
+    }
+}
