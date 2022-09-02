@@ -7,22 +7,50 @@ Integration to choose [digest][] with [clap][] on a CLI.
 Features
 --------
 
-1.  A [clap::ValueEnum][] implementation for the different digest algorithm
+1.  A [`clap::ValueEnum`][] implementation for the different digest algorithm
     types:
 
     ```rust
-    let algorithm = Arg::with_name("algorithm")
-        .short('a')
-        .long("algorithm")
-        .help("digest algorithm")
+    use clap::builder::{Arg, EnumValueParser};
+    use clap_digest::Digest;
+
+    Arg::new("digest")
         .takes_value(true)
-        // this here is the important bit:
-        .value_parser(clap::builder::EnumValueParser::<Digest>::new());
+        .value_parser(EnumValueParser::<Digest>::new())
     ```
+
+1.  Ready-to-use [`clap::Arg`][] implementations:
+
+    ```rust
+    use clap::{Command, ValueEnum};
+    use clap_digest::{Digest, DynDigest};
+
+    let cli = Command::new("myapp")
+        .arg(clap_digest::arg::digest().required_unless_present("list-digests"))
+        .arg(clap_digest::arg::list_digests());
+
+    let args = cli.get_matches_from(["myapp", "--list-digests"]);
+
+    if args.contains_id("list-digests") {
+        for digest in Digest::value_variants() {
+            println!("{digest}");
+        }
+    } else {
+        let digest = *args
+            .get_one::<Digest>("digest")
+            .expect("has default via clap");
+
+        todo!()
+    }
+    ```
+
+    See the [`clap_digest::arg`][crate::arg] module for more information.
 
 1.  A conversion from `clap_digest::Digest` to `digest::DynDigest`:
 
     ```rust
+    use clap_digest::{Digest, DynDigest};
+
     // fn doing some hashing, using any DynDigest implementation
     fn dyn_hash(hasher: &mut dyn DynDigest, data: &[u8]) -> String {
         hasher.update(data);
@@ -31,9 +59,9 @@ Features
     }
 
     // parse user-supplied CLI input to clap_digest::Digest with clap
-    // suppose user runs this with: `command --algorithm MD5`
+    // suppose user runs this with: `command --digest MD5`
     // let args = cli.get_matches();
-    let digest = *args.get_one::<Digest>("algorithm").unwrap();
+    let digest = *args.get_one::<Digest>("digest").unwrap();
 
     // convert to DynDigest
     let mut digest: Box<dyn DynDigest> = digest.into();
@@ -61,23 +89,23 @@ Features
 Example
 -------
 
-For a complete CLI example, see `examples/cksum.rs`.
+For a complete CLI example, see [`examples/cksum.rs`](examples/cksum.rs).
 
 ```console
-$ cargo run --example cksum -- -a SHA1 Cargo.toml
+$ cargo run --example cksum -- -d SHA1 Cargo.toml
 7a96ee85606435fe1f39c3fa6bdf4cf9bbbc338c  Cargo.toml
 
 $ sha1sum Cargo.toml
 7a96ee85606435fe1f39c3fa6bdf4cf9bbbc338c  Cargo.toml
 
-$ cargo run --example cksum -- -a MD5 Cargo.toml | md5sum -c
+$ cargo run --example cksum -- -d MD5 Cargo.toml | md5sum -c
 Cargo.toml: OK
 ```
 
 List all supported algorithms:
 
 ```console
-$ cargo run --example cksum -- --list-algorithms
+$ cargo run --example cksum -- --list-digests
 BLAKE2b512
 BLAKE2s256
 BLAKE3
@@ -87,7 +115,7 @@ BLAKE3
 All algorithm groups are feature-gated, so you can choose:
 
 ```console
-$ cargo run --example cksum --no-default-features --features md5,sha1,sha2 -- --list-algorithms
+$ cargo run --example cksum --no-default-features --features md5,sha1,sha2 -- --list-digests
 MD5
 SHA1
 SHA224
@@ -100,5 +128,7 @@ SHA512/256
 
 
 [clap]: https://crates.io/crates/clap
-[clap::ValueEnum]: https://docs.rs/clap/latest/clap/trait.ValueEnum.html
+[`clap::Arg`]: https://docs.rs/clap/latest/clap/struct.Arg.html
+[`clap::ValueEnum`]: https://docs.rs/clap/latest/clap/trait.ValueEnum.html
+[crate::arg]: https://docs.rs/clap_digest/latest/clap_digest/arg/index.html
 [digest]: https://github.com/RustCrypto/hashes#supported-algorithms

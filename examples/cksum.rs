@@ -15,9 +15,9 @@ fn hash_path(path: impl AsRef<Path>, hasher: &mut dyn DynDigest) -> Result<Box<[
 fn main() -> Result<()> {
     let args = cli().get_matches();
 
-    if args.is_present("list-algorithms") {
-        for algorithm in Digest::value_variants() {
-            println!("{algorithm}");
+    if args.contains_id("list-digests") {
+        for digest in Digest::value_variants() {
+            println!("{digest}");
         }
     } else {
         let inputs = args
@@ -25,7 +25,7 @@ fn main() -> Result<()> {
             .expect("at least one input is required via clap");
 
         let digest = *args
-            .get_one::<Digest>("algorithm")
+            .get_one::<Digest>("digest")
             .expect("has default via clap");
 
         let mut digest: Box<dyn DynDigest> = digest.into();
@@ -42,27 +42,15 @@ fn main() -> Result<()> {
 }
 
 fn cli() -> Command<'static> {
-    let algorithm = Arg::with_name("algorithm")
-        .short('a')
-        .long("algorithm")
-        .help("digest algorithm")
-        .takes_value(true)
-        .required_unless_present("list-algorithms")
-        .value_parser(clap::builder::EnumValueParser::<Digest>::new());
-
-    let list_algorithms = Arg::with_name("list-algorithms")
-        .long("--list-algorithms")
-        .help("list supported digest algorithms");
-
-    let input = Arg::with_name("input")
+    let input = Arg::new("input")
         .help("input files")
-        .required_unless_present("list-algorithms")
+        .required_unless_present("list-digests")
         .multiple_values(true);
 
     Command::new("cksum")
         .arg(input)
-        .arg(algorithm)
-        .arg(list_algorithms)
+        .arg(clap_digest::arg::digest().required_unless_present("list-digests"))
+        .arg(clap_digest::arg::list_digests())
         .about("simple cksum clone that hashes text files")
-        .after_help("try `cargo run --example cksum -- -a MD5 Cargo.toml | md5sum -c`")
+        .after_help("try `cargo run --example cksum -- -d MD5 Cargo.toml | md5sum -c`")
 }
