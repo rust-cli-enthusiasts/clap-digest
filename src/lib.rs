@@ -539,133 +539,133 @@ impl From<Digest> for Box<dyn DynDigest> {
     fn from(digest: Digest) -> Self {
         match digest {
             #[cfg(feature = "blake2")]
-            Digest::BLAKE2b512 => Box::new(blake2::Blake2b512::default()),
+            Digest::BLAKE2b512 => Box::<blake2::Blake2b512>::default(),
 
             #[cfg(feature = "blake2")]
-            Digest::BLAKE2s256 => Box::new(blake2::Blake2s256::default()),
+            Digest::BLAKE2s256 => Box::<blake2::Blake2s256>::default(),
 
             #[cfg(feature = "blake3")]
-            Digest::BLAKE3 => Box::new(blake3::Hasher::default()),
+            Digest::BLAKE3 => Box::<blake3::Hasher>::default(),
 
             #[cfg(feature = "fsb")]
-            Digest::FSB160 => Box::new(fsb::Fsb160::default()),
+            Digest::FSB160 => Box::<fsb::Fsb160>::default(),
 
             #[cfg(feature = "fsb")]
-            Digest::FSB224 => Box::new(fsb::Fsb224::default()),
+            Digest::FSB224 => Box::<fsb::Fsb224>::default(),
 
             #[cfg(feature = "fsb")]
-            Digest::FSB256 => Box::new(fsb::Fsb256::default()),
+            Digest::FSB256 => Box::<fsb::Fsb256>::default(),
 
             #[cfg(feature = "fsb")]
-            Digest::FSB384 => Box::new(fsb::Fsb384::default()),
+            Digest::FSB384 => Box::<fsb::Fsb384>::default(),
 
             #[cfg(feature = "fsb")]
-            Digest::FSB512 => Box::new(fsb::Fsb512::default()),
+            Digest::FSB512 => Box::<fsb::Fsb512>::default(),
 
             #[cfg(feature = "gost94")]
-            Digest::GOST94CryptoPro => Box::new(gost94::Gost94CryptoPro::default()),
+            Digest::GOST94CryptoPro => Box::<gost94::Gost94CryptoPro>::default(),
 
             #[cfg(feature = "gost94")]
-            Digest::GOST94UA => Box::new(gost94::Gost94UA::default()),
+            Digest::GOST94UA => Box::<gost94::Gost94UA>::default(),
 
             #[cfg(feature = "gost94")]
-            Digest::GOST94s2015 => Box::new(gost94::Gost94s2015::default()),
+            Digest::GOST94s2015 => Box::<gost94::Gost94s2015>::default(),
 
             #[cfg(feature = "groestl")]
-            Digest::Groestl224 => Box::new(groestl::Groestl224::default()),
+            Digest::Groestl224 => Box::<groestl::Groestl224>::default(),
 
             #[cfg(feature = "groestl")]
-            Digest::Groestl256 => Box::new(groestl::Groestl256::default()),
+            Digest::Groestl256 => Box::<groestl::Groestl256>::default(),
 
             #[cfg(feature = "groestl")]
-            Digest::Groestl384 => Box::new(groestl::Groestl384::default()),
+            Digest::Groestl384 => Box::<groestl::Groestl384>::default(),
 
             #[cfg(feature = "groestl")]
-            Digest::Groestl512 => Box::new(groestl::Groestl512::default()),
+            Digest::Groestl512 => Box::<groestl::Groestl512>::default(),
 
             #[cfg(feature = "md2")]
-            Digest::MD2 => Box::new(md2::Md2::default()),
+            Digest::MD2 => Box::<md2::Md2>::default(),
 
             #[cfg(feature = "md4")]
-            Digest::MD4 => Box::new(md4::Md4::default()),
+            Digest::MD4 => Box::<md4::Md4>::default(),
 
             #[cfg(feature = "md5")]
-            Digest::MD5 => Box::new(md5::Md5::default()),
+            Digest::MD5 => Box::<md5::Md5>::default(),
 
             #[cfg(feature = "ripemd")]
-            Digest::RIPEMD160 => Box::new(ripemd::Ripemd160::default()),
+            Digest::RIPEMD160 => Box::<ripemd::Ripemd160>::default(),
 
             #[cfg(feature = "ripemd")]
-            Digest::RIPEMD256 => Box::new(ripemd::Ripemd256::default()),
+            Digest::RIPEMD256 => Box::<ripemd::Ripemd256>::default(),
 
             #[cfg(feature = "ripemd")]
-            Digest::RIPEMD320 => Box::new(ripemd::Ripemd320::default()),
+            Digest::RIPEMD320 => Box::<ripemd::Ripemd320>::default(),
 
             #[cfg(feature = "sha1")]
-            Digest::SHA1 => Box::new(sha1::Sha1::default()),
+            Digest::SHA1 => Box::<sha1::Sha1>::default(),
 
             #[cfg(feature = "sha2")]
-            Digest::SHA224 => Box::new(sha2::Sha224::default()),
+            Digest::SHA224 => Box::<sha2::Sha224>::default(),
 
             #[cfg(feature = "sha2")]
-            Digest::SHA256 => Box::new(sha2::Sha256::default()),
+            Digest::SHA256 => Box::<sha2::Sha256>::default(),
 
             #[cfg(feature = "sha2")]
-            Digest::SHA384 => Box::new(sha2::Sha384::default()),
+            Digest::SHA384 => Box::<sha2::Sha384>::default(),
 
             #[cfg(feature = "sha2")]
-            Digest::SHA512 => Box::new(sha2::Sha512::default()),
+            Digest::SHA512 => Box::<sha2::Sha512>::default(),
 
             #[cfg(feature = "sha2")]
-            Digest::SHA512_224 => Box::new(sha2::Sha512_224::default()),
+            Digest::SHA512_224 => Box::<sha2::Sha512_224>::default(),
 
             #[cfg(feature = "sha2")]
-            Digest::SHA512_256 => Box::new(sha2::Sha512_256::default()),
+            Digest::SHA512_256 => Box::<sha2::Sha512_256>::default(),
 
             #[cfg(feature = "sha3")]
-            Digest::SHA3_224 => Box::new(sha3::Sha3_224::default()),
+            Digest::SHA3_224 => Box::<sha3::Sha3_224>::default(),
 
             #[cfg(feature = "sha3")]
-            Digest::SHA3_256 => Box::new(sha3::Sha3_256::default()),
+            Digest::SHA3_256 => Box::<sha3::Sha3_256>::default(),
 
             #[cfg(feature = "sha3")]
-            Digest::SHA3_384 => Box::new(sha3::Sha3_384::default()),
+            Digest::SHA3_384 => Box::<sha3::Sha3_384>::default(),
 
             #[cfg(feature = "sha3")]
-            Digest::SHA3_512 => Box::new(sha3::Sha3_512::default()),
+            Digest::SHA3_512 => Box::<sha3::Sha3_512>::default(),
 
             #[cfg(feature = "shabal")]
-            Digest::SHABAL192 => Box::new(shabal::Shabal192::default()),
+            Digest::SHABAL192 => Box::<shabal::Shabal192>::default(),
 
             #[cfg(feature = "shabal")]
-            Digest::SHABAL224 => Box::new(shabal::Shabal224::default()),
+            Digest::SHABAL224 => Box::<shabal::Shabal224>::default(),
 
             #[cfg(feature = "shabal")]
-            Digest::SHABAL256 => Box::new(shabal::Shabal256::default()),
+            Digest::SHABAL256 => Box::<shabal::Shabal256>::default(),
 
             #[cfg(feature = "shabal")]
-            Digest::SHABAL384 => Box::new(shabal::Shabal384::default()),
+            Digest::SHABAL384 => Box::<shabal::Shabal384>::default(),
 
             #[cfg(feature = "shabal")]
-            Digest::SHABAL512 => Box::new(shabal::Shabal512::default()),
+            Digest::SHABAL512 => Box::<shabal::Shabal512>::default(),
 
             #[cfg(feature = "sm3")]
-            Digest::SM3 => Box::new(sm3::Sm3::default()),
+            Digest::SM3 => Box::<sm3::Sm3>::default(),
 
             #[cfg(feature = "streebog")]
-            Digest::Streebog256 => Box::new(streebog::Streebog256::default()),
+            Digest::Streebog256 => Box::<streebog::Streebog256>::default(),
 
             #[cfg(feature = "streebog")]
-            Digest::Streebog512 => Box::new(streebog::Streebog512::default()),
+            Digest::Streebog512 => Box::<streebog::Streebog512>::default(),
 
             #[cfg(feature = "tiger")]
-            Digest::Tiger => Box::new(tiger::Tiger::default()),
+            Digest::Tiger => Box::<tiger::Tiger>::default(),
 
             #[cfg(feature = "tiger")]
-            Digest::Tiger2 => Box::new(tiger::Tiger2::default()),
+            Digest::Tiger2 => Box::<tiger::Tiger2>::default(),
 
             #[cfg(feature = "whirlpool")]
-            Digest::Whirlpool => Box::new(whirlpool::Whirlpool::default()),
+            Digest::Whirlpool => Box::<whirlpool::Whirlpool>::default(),
         }
     }
 }
