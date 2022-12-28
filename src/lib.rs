@@ -8,11 +8,11 @@
 //!     algorithm types:
 //!
 //!     ```rust
-//!     use clap::builder::{Arg, EnumValueParser};
+//!     use clap::builder::{Arg, ArgAction, EnumValueParser};
 //!     use clap_digest::Digest;
 //!
 //!     let digest = Arg::new("digest")
-//!         .takes_value(true)
+//!         .action(ArgAction::Set)
 //!         .value_parser(EnumValueParser::<Digest>::new());
 //!     ```
 //!
@@ -132,7 +132,7 @@ pub mod arg;
 
 use std::fmt;
 
-use clap::{PossibleValue, ValueEnum};
+use clap::{builder::PossibleValue, ValueEnum};
 pub use digest::DynDigest;
 
 #[cfg(not(any(
@@ -530,7 +530,7 @@ impl ValueEnum for Digest {
         ]
     }
 
-    fn to_possible_value<'a>(&self) -> Option<PossibleValue<'a>> {
+    fn to_possible_value(&self) -> Option<PossibleValue> {
         Some(PossibleValue::new(self.name()))
     }
 }

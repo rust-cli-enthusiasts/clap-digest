@@ -11,11 +11,11 @@ Features
     types:
 
     ```rust
-    use clap::builder::{Arg, EnumValueParser};
+    use clap::builder::{Arg, ArgAction, EnumValueParser};
     use clap_digest::Digest;
 
     Arg::new("digest")
-        .takes_value(true)
+        .action(ArgAction::Set)
         .value_parser(EnumValueParser::<Digest>::new())
     ```
 
@@ -31,7 +31,7 @@ Features
 
     let args = cli.get_matches_from(["myapp", "--list-digests"]);
 
-    if args.contains_id("list-digests") {
+    if args.get_flag("list-digests") {
         for digest in Digest::value_variants() {
             println!("{digest}");
         }
@@ -46,7 +46,7 @@ Features
 
     See the [`clap_digest::arg`][crate::arg] module for more information.
 
-1.  A conversion from `clap_digest::Digest` to `digest::DynDigest`:
+1.  A conversion from [`clap_digest::Digest`][] to [`digest::DynDigest`][]:
 
     ```rust
     use clap_digest::{Digest, DynDigest};
@@ -130,5 +130,7 @@ SHA512/256
 [clap]: https://crates.io/crates/clap
 [`clap::Arg`]: https://docs.rs/clap/latest/clap/struct.Arg.html
 [`clap::ValueEnum`]: https://docs.rs/clap/latest/clap/trait.ValueEnum.html
+[`clap_digest::Digest`]: https://docs.rs/clap-digest/latest/clap_digest/enum.Digest.html
+[`digest::DynDigest`]: https://docs.rs/digest/latest/digest/trait.DynDigest.html
 [crate::arg]: https://docs.rs/clap_digest/latest/clap_digest/arg/index.html
 [digest]: https://github.com/RustCrypto/hashes#supported-algorithms

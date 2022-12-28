@@ -12,7 +12,7 @@ categories = ["command-line-interface", "cryptography"]
 edition = "2021"
 
 [dependencies]
-clap = "3"
+clap = "4"
 digest = "0.10"
 serde = { version = "1.0", optional = true, features = ["derive"] }
 blake2 = { version = "0.10", optional = true }
@@ -35,6 +35,7 @@ whirlpool = { version = "0.10", optional = true }
 
 [dev-dependencies]
 anyhow = "1"
+clap = { version = "4", features = ["cargo", "deprecated", "wrap_help"] }
 
 [features]
 md5 = ["dep:md-5"]

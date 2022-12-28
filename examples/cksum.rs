@@ -1,7 +1,7 @@
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use anyhow::Result;
-use clap::{Arg, Command, ValueEnum};
+use clap::{value_parser, Arg, ArgAction, Command, ValueEnum};
 use clap_digest::Digest;
 use digest::DynDigest;
 
@@ -15,13 +15,13 @@ fn hash_path(path: impl AsRef<Path>, hasher: &mut dyn DynDigest) -> Result<Box<[
 fn main() -> Result<()> {
     let args = cli().get_matches();
 
-    if args.contains_id("list-digests") {
+    if args.get_flag("list-digests") {
         for digest in Digest::value_variants() {
             println!("{digest}");
         }
     } else {
         let inputs = args
-            .values_of("input")
+            .get_many::<PathBuf>("input")
             .expect("at least one input is required via clap");
 
         let digest = *args
@@ -34,18 +34,19 @@ fn main() -> Result<()> {
             let hash = hash_path(input, &mut (*digest))?;
             let hash: String = hash.iter().map(|byte| format!("{byte:02x}")).collect();
 
-            println!("{hash}  {input}");
+            println!("{hash}  {}", input.display());
         }
     }
 
     Ok(())
 }
 
-fn cli() -> Command<'static> {
+fn cli() -> Command {
     let input = Arg::new("input")
         .help("input files")
         .required_unless_present("list-digests")
-        .multiple_values(true);
+        .action(ArgAction::Append)
+        .value_parser(value_parser!(PathBuf));
 
     Command::new("cksum")
         .arg(input)

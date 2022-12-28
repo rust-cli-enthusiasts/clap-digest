@@ -25,7 +25,7 @@
 //! }
 //! ```
 
-use clap::builder::{Arg, EnumValueParser};
+use clap::builder::{Arg, ArgAction, EnumValueParser};
 
 use crate::Digest;
 
@@ -48,7 +48,7 @@ use crate::Digest;
 /// assert_eq!(digest, Digest::MD5);
 /// ```
 #[must_use]
-pub fn digest<'a>() -> Arg<'a> {
+pub fn digest() -> Arg {
     Arg::new("digest")
         .short('d')
         .long("digest")
@@ -57,7 +57,7 @@ pub fn digest<'a>() -> Arg<'a> {
             "Use this digest algorithm. These algorithms are optional \
              dependencies/features that may be chosen during compilation.",
         )
-        .takes_value(true)
+        .action(ArgAction::Set)
         .value_parser(EnumValueParser::<Digest>::new())
 }
 
@@ -75,9 +75,10 @@ pub fn digest<'a>() -> Arg<'a> {
 /// assert!(args.contains_id("list-digests"));
 /// ```
 #[must_use]
-pub fn list_digests<'a>() -> Arg<'a> {
+pub fn list_digests() -> Arg {
     Arg::new("list-digests")
         .long("list-digests")
+        .action(ArgAction::SetTrue)
         .help("list supported digest algorithms")
 }
 
