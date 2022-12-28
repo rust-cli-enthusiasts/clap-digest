@@ -32,7 +32,7 @@ fn main() -> Result<()> {
 
         for input in inputs {
             let hash = hash_path(input, &mut (*digest))?;
-            let hash: String = hash.iter().map(|byte| format!("{:02x}", byte)).collect();
+            let hash: String = hash.iter().map(|byte| format!("{byte:02x}")).collect();
 
             println!("{hash}  {input}");
         }
