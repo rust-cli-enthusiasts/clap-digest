@@ -67,7 +67,7 @@ Features
     let mut digest: Box<dyn DynDigest> = digest.into();
 
     // use with hashing function
-    let hash = dyn_hash(&mut (*digest), b"foo");
+    let hash = dyn_hash(digest.as_mut(), b"foo");
 
     assert_eq!(hash, "acbd18db4cc2f85cedef654fccc4a4d8");
     ```

@@ -31,7 +31,7 @@ fn main() -> Result<()> {
         let mut digest: Box<dyn DynDigest> = digest.into();
 
         for input in inputs {
-            let hash = hash_path(input, &mut (*digest))?;
+            let hash = hash_path(input, digest.as_mut())?;
             let hash: String = hash.iter().map(|byte| format!("{byte:02x}")).collect();
 
             println!("{hash}  {}", input.display());
