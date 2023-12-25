@@ -1,0 +1,25 @@
+---
+
+name: rust-audit
+
+on:
+  pull_request:
+    paths:
+      - '**/Cargo.toml'
+  push:
+    branches:
+      - main
+      - wip/next
+    paths:
+      - '**/Cargo.toml'
+
+jobs:
+  cargo-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rustsec/audit-check@v1.4.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+...
