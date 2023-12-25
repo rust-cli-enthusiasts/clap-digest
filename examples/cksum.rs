@@ -6,7 +6,10 @@ use clap::{value_parser, Arg, ArgAction, Command, ValueEnum};
 use clap_digest::Digest;
 use digest::DynDigest;
 
-fn hash_path(path: impl AsRef<Path>, hasher: &mut dyn DynDigest) -> Result<Box<[u8]>> {
+fn hash_path(
+    path: impl AsRef<Path>,
+    hasher: &mut dyn DynDigest,
+) -> Result<Box<[u8]>> {
     let content = std::fs::read_to_string(path)?;
     let bytes = content.as_bytes();
     hasher.update(bytes);
@@ -56,8 +59,12 @@ fn cli() -> Command {
 
     Command::new("cksum")
         .arg(input)
-        .arg(clap_digest::arg::digest().required_unless_present("list-digests"))
+        .arg(
+            clap_digest::arg::digest().required_unless_present("list-digests"),
+        )
         .arg(clap_digest::arg::list_digests())
         .about("simple cksum clone that hashes text files")
-        .after_help("try `cargo run --example cksum -- -d MD5 Cargo.toml | md5sum -c`")
+        .after_help(
+            "try `cargo run --example cksum -- -d MD5 Cargo.toml | md5sum -c`",
+        )
 }

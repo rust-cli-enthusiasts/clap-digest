@@ -154,7 +154,9 @@ pub use digest::DynDigest;
     feature = "tiger",
     feature = "whirlpool"
 )))]
-compile_error!("at least one digest algorithm family feature needs to be enabled");
+compile_error!(
+    "at least one digest algorithm family feature needs to be enabled"
+);
 
 /// Supported digest algorithms.
 #[allow(missing_docs)] // no docs for the variants
@@ -563,7 +565,9 @@ impl From<Digest> for Box<dyn DynDigest> {
             Digest::FSB512 => Box::<fsb::Fsb512>::default(),
 
             #[cfg(feature = "gost94")]
-            Digest::GOST94CryptoPro => Box::<gost94::Gost94CryptoPro>::default(),
+            Digest::GOST94CryptoPro => {
+                Box::<gost94::Gost94CryptoPro>::default()
+            }
 
             #[cfg(feature = "gost94")]
             Digest::GOST94UA => Box::<gost94::Gost94UA>::default(),
