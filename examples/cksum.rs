@@ -1,3 +1,4 @@
+use std::fmt::Write;
 use std::path::{Path, PathBuf};
 
 use anyhow::Result;
@@ -32,7 +33,12 @@ fn main() -> Result<()> {
 
         for input in inputs {
             let hash = hash_path(input, digest.as_mut())?;
-            let hash: String = hash.iter().map(|byte| format!("{byte:02x}")).collect();
+
+            let hash = hash.iter().fold(String::new(), |mut output, b| {
+                // UNWRAP: safe to write! to String
+                write!(output, "{b:02x}").unwrap();
+                output
+            });
 
             println!("{hash}  {}", input.display());
         }
