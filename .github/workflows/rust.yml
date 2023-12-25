@@ -8,6 +8,9 @@ on:
       - 'Cargo.toml'
       - '**.rs'
   push:
+    branches:
+      - main
+      - wip/next
     paths:
       - 'Cargo.toml'
       - '**.rs'
@@ -29,7 +32,7 @@ jobs:
     steps:
 
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: set up rust toolchain
         uses: actions-rs/toolchain@v1
