@@ -5,13 +5,17 @@ name: rust-audit
 on:
   pull_request:
     paths:
+      - .github/workflows/rust-audit.yml
       - '**/Cargo.toml'
   push:
     branches:
       - main
       - wip/next
     paths:
+      - .github/workflows/rust-audit.yml
       - '**/Cargo.toml'
+  schedule:
+    - cron: '0 6 * * 1'
 
 jobs:
   cargo-audit:
