@@ -2,7 +2,7 @@ use std::fmt::Write;
 use std::path::{Path, PathBuf};
 
 use anyhow::Result;
-use clap::{value_parser, Arg, ArgAction, Command, ValueEnum};
+use clap::{Arg, ArgAction, Command, ValueEnum, value_parser};
 use clap_digest::Digest;
 use digest::DynDigest;
 

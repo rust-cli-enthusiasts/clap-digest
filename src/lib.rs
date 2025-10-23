@@ -132,7 +132,7 @@ pub mod arg;
 
 use std::fmt;
 
-use clap::{builder::PossibleValue, ValueEnum};
+use clap::{ValueEnum, builder::PossibleValue};
 pub use digest::DynDigest;
 
 #[cfg(not(any(
