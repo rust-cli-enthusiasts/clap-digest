@@ -5,15 +5,15 @@ name: rust-audit
 on:
   pull_request:
     paths:
-      - .github/workflows/rust-audit.yml
-      - '**/Cargo.toml'
+      - '.github/workflows/rust-audit.yml'
+      - 'Cargo.toml'
   push:
     branches:
       - main
       - wip/next
     paths:
-      - .github/workflows/rust-audit.yml
-      - '**/Cargo.toml'
+      - '.github/workflows/rust-audit.yml'
+      - 'Cargo.toml'
   schedule:
     - cron: '0 6 * * 1'
 
@@ -21,7 +21,7 @@ jobs:
   cargo-audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: generate Cargo.lock
         run: cargo generate-lockfile
       - uses: rustsec/audit-check@v2.0.0
