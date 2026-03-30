@@ -31,7 +31,7 @@ sha3 = { version = "0.10", optional = true }
 shabal = { version = "0.4", optional = true }
 sm3 = { version = "0.4", optional = true }
 streebog = { version = "0.10", optional = true }
-tiger = { version = "0.2", optional = true }
+tiger = { version = "0.3", optional = true }
 whirlpool = { version = "0.10", optional = true }
 
 [dev-dependencies]
