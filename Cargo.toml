@@ -18,7 +18,7 @@ digest = "0.10"
 serde = { version = "1.0", optional = true, features = ["derive"] }
 blake2 = { version = "0.10", optional = true }
 blake3 = { version = "1", optional = true, features = ["traits-preview"] }
-fsb = { version = "0.1", optional = true }
+fsb = { version = "0.2", optional = true }
 gost94 = { version = "0.10", optional = true }
 groestl = { version = "0.10", optional = true }
 md2 = { version = "0.10", optional = true }
