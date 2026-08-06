@@ -14,25 +14,25 @@ rust-version = "1.85"
 
 [dependencies]
 clap = "4"
-digest = "0.10"
+digest = "0.11"
 serde = { version = "1.0", optional = true, features = ["derive"] }
-blake2 = { version = "0.10", optional = true }
+blake2 = { version = "0.11.0-rc.6", optional = true }
 blake3 = { version = "1", optional = true, features = ["traits-preview"] }
-fsb = { version = "0.1", optional = true }
-gost94 = { version = "0.10", optional = true }
-groestl = { version = "0.10", optional = true }
-md2 = { version = "0.10", optional = true }
-md4 = { version = "0.10", optional = true }
-md-5 = { version = "0.10", optional = true }
-ripemd = { version = "0.1", optional = true }
-sha1 = { version = "0.10", optional = true }
-sha2 = { version = "0.10", optional = true }
-sha3 = { version = "0.10", optional = true }
-shabal = { version = "0.4", optional = true }
-sm3 = { version = "0.4", optional = true }
-streebog = { version = "0.10", optional = true }
-tiger = { version = "0.2", optional = true }
-whirlpool = { version = "0.10", optional = true }
+fsb = { version = "0.2", optional = true }
+gost94 = { version = "0.11", optional = true }
+groestl = { version = "0.11", optional = true }
+md2 = { version = "0.11", optional = true }
+md4 = { version = "0.11", optional = true }
+md-5 = { version = "0.11", optional = true }
+ripemd = { version = "0.2", optional = true }
+sha1 = { version = "0.11", optional = true }
+sha2 = { version = "0.11", optional = true }
+sha3 = { version = "0.12", optional = true }
+shabal = { version = "0.5", optional = true }
+sm3 = { version = "0.5", optional = true }
+streebog = { version = "0.11", optional = true }
+tiger = { version = "0.3", optional = true }
+whirlpool = { version = "0.11", optional = true }
 
 [dev-dependencies]
 anyhow = "1"
